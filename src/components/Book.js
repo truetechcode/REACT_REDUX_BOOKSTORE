@@ -7,7 +7,7 @@ function Book(props) {
     <div className="Lesson-Panel">
       <div className="title">{title}</div>
       <div className="category">{category}</div>
-      <button className="delete-button" onClick={() => props.onClick(props.index)}> Remove Book </button>
+      <button className="delete-button" onClick={() => props.onClick(id)}> Remove Book </button>
     </div>
   )
 }

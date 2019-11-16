@@ -2,21 +2,18 @@ const initialState = [];
 
 const books = (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATE_BOOK':
-      return [...state,
-      {
-        id: action.id,
-        title: action.book.title,
-        category: action.book.category
-      }
-      ]
+    case 'LOAD_BOOKS':
+      return [...action.books]
 
-    case 'REMOVE_BOOK':
-      return [
-        ...state.slice(0, action.bookIndex),
-        ...state.slice(action.bookIndex + 1, state.length)
-      ];
+    case 'CREATE_REQUEST':
+      return [...state]
 
+    case 'CREATE_SUCCESS':
+      return [...state, {id: action.book.id, title: action.book.title, category: action.book.category}]
+
+    case 'CREATE_FAILURE':
+      return [...state]
+            
     default:
       return state;
   }
