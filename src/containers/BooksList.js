@@ -2,24 +2,28 @@ import React from 'react'
 import { connect } from "react-redux";
 import Book from "../components/Book";
 import CategoryFilter from "../components/CategoryFilter";
-import { removeBook, changeFilter, loadBooks } from '../actions/index';
+import { removeMessage, removeBook, changeFilter, loadBooks } from '../actions/index';
 import PropTypes from 'prop-types'
 import '../BooksList.css'
 
 
 class BooksList extends React.Component {
+  
+  UNSAFE_componentWillReceiveProps(props) {
+    const { message } = this.props;
+    if (props.message !== message) {
+      this.fetchBooks()
+      this.props.clearState()
+    }
+  }
 
   handleFilterChange = (e) => {
     let filter = e.target.value;
     this.props.changeFilter(filter)
   }
 
-  componentDidMount = () => {
-    const requestOptions = {
-      // headers: { 'Content-Type': 'application/json' },
-      // method: 'GET',
-    };
-    fetch('https://boiling-ravine-66715.herokuapp.com/api/v1/books', requestOptions)
+  fetchBooks = () => {
+    fetch('https://boiling-ravine-66715.herokuapp.com/api/v1/books')
     .then(
       response => {
         if (!response.ok) {
@@ -31,6 +35,10 @@ class BooksList extends React.Component {
     .catch(error => console.log(error))
   }
 
+  componentDidMount = () => {
+    this.fetchBooks()
+  }
+
   render(){
     return (
       <>
@@ -38,7 +46,7 @@ class BooksList extends React.Component {
           <div className="header-title">BookStore CMS</div>
           <div>
             <CategoryFilter handleChange={this.handleFilterChange} />
-          </div>      
+          </div>
         </div>
         <div><p>{this.props.message}</p></div>
         <div>
@@ -67,7 +75,12 @@ const mapDispatchToProps = dispatch => {
   return {
     removeBook: (bookIndex) => dispatch(removeBook(bookIndex)),
     changeFilter: (category) => dispatch(changeFilter(category)),
-    loadBooks: (books) => dispatch(loadBooks(books))
+    loadBooks: (books) => dispatch(loadBooks(books)),
+    clearState: () => {
+      setTimeout(() => {
+        dispatch(removeMessage())
+      }, 2000);
+    }
   }
 }
 

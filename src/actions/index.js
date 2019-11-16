@@ -3,11 +3,9 @@ export const createBook = book => {
   return dispatch => {
       dispatch(request(book))
       return add(book)
-      .then(
-          response => response,
-          error => dispatch(failure(error))
-      )
-      .then(json => dispatch(success(book)))
+      .then(response => response)
+      .then(json => dispatch(success(json)))
+      .catch(error => dispatch(failure(error)))
   }
 
   function request(book) { return { type: 'CREATE_REQUEST', book } }
@@ -22,16 +20,20 @@ export const loadBooks = books => {
   }
 }
 
+export const removeMessage = () => {
+  return {
+    type: 'REMOVE_MESSAGE'
+  }
+}
+
 export const removeBook = (bookIndex) => {
 
   return dispatch => {
     dispatch(request(bookIndex))
     return remove(bookIndex)
-    .then(
-        response => response,
-        error => dispatch(failure(error))
-    )
+    .then(response => response)
     .then(json => dispatch(success(json)))
+    .catch(error => dispatch(failure(error)))
 }
 
 function request(message) { return { type: 'DELETE_REQUEST', message } }

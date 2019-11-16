@@ -3,7 +3,7 @@ const initialState = [];
 const books = (state = initialState, action) => {
   switch (action.type) {
     case 'LOAD_BOOKS':
-      return [...state, ...action.books]
+      return [...action.books]
 
     case 'CREATE_REQUEST':
       return [...state]
