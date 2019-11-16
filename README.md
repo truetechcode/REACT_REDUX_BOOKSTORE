@@ -32,8 +32,11 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 
-### Live demo
+### Live demo (FRONT END)
 
 [Live Deploy to Now](https://reactreduxbookstore.terveraosu.now.sh/)
 
+### Live API (BACK END)
+
+[API CONSUMED](https://immense-savannah-47088.herokuapp.com/api/v1/books)
 
