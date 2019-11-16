@@ -34,6 +34,6 @@ You will also see any lint errors in the console.
 
 ### Live demo
 
-https://redux-bookstore.herokuapp.com/
+[Live Deploy to Now](https://reactreduxbookstore.terveraosu.now.sh/)
 
 
