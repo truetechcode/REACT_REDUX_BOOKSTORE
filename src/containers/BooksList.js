@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux";
 import Book from "../components/Book";
+import BooksForm from "../containers/Booksform";
 import CategoryFilter from "../components/CategoryFilter";
 import { removeMessage, removeBook, changeFilter, loadBooks } from '../actions/index';
 import PropTypes from 'prop-types'
@@ -43,13 +44,14 @@ class BooksList extends React.Component {
     return (
       <>
         <div className="header">
-          <div className="header-title">BookStore CMS</div>
-          <div>
+          <div className="header-title">BS</div>
+          <div className="book-filter">
             <CategoryFilter handleChange={this.handleFilterChange} />
           </div>
         </div>
         <div><p>{this.props.message}</p></div>
-        <div>
+        <BooksForm />
+        <div className="book-list">
           {
             this.props.filteredBooks.map((book, index) => {
               return (
